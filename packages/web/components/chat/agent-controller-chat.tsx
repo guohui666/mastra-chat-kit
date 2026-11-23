@@ -179,6 +179,14 @@ export function AgentControllerChat({
   // White composer so it pops against the zinc canvas. Rendered under the hero on the
   // empty state, or pinned at the bottom once the chat is going. The token-usage Context
   // rides in its footer; the Plan toggle leads its tools row.
+  // A first send can fail before any message exists. The error has to live in the
+  // empty state too, or Thinking… flashes and the screen looks unchanged.
+  const turnError = error ? (
+    <p role="alert" className="w-full max-w-3xl px-2 text-destructive text-sm">
+      AgentController error: {error}
+    </p>
+  ) : null;
+
   const composer = (
     <Composer
       onSend={handleSend}
@@ -226,6 +234,7 @@ export function AgentControllerChat({
           </div>
           {starterPills}
           <div className="w-full max-w-3xl">{composer}</div>
+          {turnError}
           {goal && (
             <div className="w-full max-w-3xl">
               <GoalCard goal={goal} onClear={clearGoal} />
@@ -313,9 +322,7 @@ export function AgentControllerChat({
             {/* Transient run status (controller `info` events). */}
             {info && !error && <p className="px-2 text-muted-foreground text-xs italic">{info}</p>}
 
-            {error && (
-              <p className="px-2 text-destructive text-sm">AgentController error: {error}</p>
-            )}
+            {turnError}
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>

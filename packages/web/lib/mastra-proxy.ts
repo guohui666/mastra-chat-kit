@@ -89,12 +89,23 @@ export async function forward(
   const headers = new Headers(extra);
   for (const [name, value] of auth) headers.set(name, value);
 
-  const upstream = await fetch(`${SERVER_URL}${path}`, {
-    cache: 'no-store',
-    ...rest,
-    headers,
-    ...(stream ? { signal: request.signal } : {}),
-  });
+  let upstream: Response;
+  try {
+    upstream = await fetch(`${SERVER_URL}${path}`, {
+      cache: 'no-store',
+      ...rest,
+      headers,
+      ...(stream ? { signal: request.signal } : {}),
+    });
+  } catch (err) {
+    // The route used to throw here. Next turned that into an empty 500, the
+    // composer flashed Thinking…, and the empty state had nowhere to show why.
+    const reason = err instanceof Error ? err.message : String(err);
+    return Response.json(
+      { error: `Cannot reach the Mastra server at ${SERVER_URL} (${reason})` },
+      { status: 502 },
+    );
+  }
   return new Response(upstream.body, {
     status: upstream.status,
     headers: {

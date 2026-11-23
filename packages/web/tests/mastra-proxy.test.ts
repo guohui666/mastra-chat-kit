@@ -63,6 +63,20 @@ describe('mastra-proxy', () => {
     expect(decode(calls[0].auth?.replace(/^Bearer /, '') ?? '').payload.sub).toBe('simone');
   });
 
+  it('returns 502 JSON when the Mastra server cannot be reached', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new TypeError('fetch failed');
+      }),
+    );
+    const res = await forward(req(), '/agent-controller/stream', { method: 'POST' });
+    expect(res.status).toBe(502);
+    expect(await res.json()).toEqual({
+      error: 'Cannot reach the Mastra server at http://localhost:4111 (fetch failed)',
+    });
+  });
+
   it('answers 401 without calling the server when nobody is signed in', async () => {
     configureChatKitProxy({ getUserId: async () => null });
     const res = await forward(req(), '/agent-controller/threads');
