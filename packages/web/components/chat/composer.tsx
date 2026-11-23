@@ -47,12 +47,8 @@ export type ModelOption = { id: string; name: string; provider: Provider };
 // beside it already conveys the vendor). OpenAI names keep "GPT" (it's the model
 // name, not a vendor word).
 export const MODELS: ModelOption[] = [
-  { id: 'anthropic/claude-sonnet-4-6', name: 'Sonnet 4.6', provider: 'anthropic' },
-  { id: 'anthropic/claude-opus-4-8', name: 'Opus 4.8', provider: 'anthropic' },
-  { id: 'anthropic/claude-haiku-4-5', name: 'Haiku 4.5', provider: 'anthropic' },
-  { id: 'openai/gpt-4.1-mini', name: 'GPT-4.1 mini', provider: 'openai' },
-  { id: 'openai/gpt-4o-mini', name: 'GPT-4o mini', provider: 'openai' },
-  { id: 'openai/gpt-4.1-nano', name: 'GPT-4.1 nano', provider: 'openai' },
+  { id: 'anthropic/group/smart-split', name: 'Smart Split', provider: 'anthropic' },
+  { id: 'anthropic/zhipu-glm/glm-5.3-flash', name: 'GLM 5.3 Flash', provider: 'anthropic' },
 ];
 
 // What the server's /agent-controller/stream accepts (server routes/stream-body.ts):

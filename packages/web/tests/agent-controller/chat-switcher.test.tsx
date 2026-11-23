@@ -37,7 +37,7 @@ describe('ChatSwitcher — defaults', () => {
     expect(screen.getByLabelText('Show workbench')).toBeInTheDocument();
     expect(screen.getByText('Weather in LA')).toBeInTheDocument();
     expect(screen.getAllByText('Search').length).toBeGreaterThan(0);
-    expect(screen.getByText('Sonnet 4.6')).toBeInTheDocument();
+    expect(screen.getByText('Smart Split')).toBeInTheDocument();
   });
 });
 
@@ -62,7 +62,7 @@ describe('ChatSwitcher — host options', () => {
 
   it('hides the model picker and the Search toggle', () => {
     renderShell({ models: false, webSearch: false });
-    expect(screen.queryByText('Sonnet 4.6')).not.toBeInTheDocument();
+    expect(screen.queryByText('Smart Split')).not.toBeInTheDocument();
     expect(screen.queryByText('Search')).not.toBeInTheDocument();
   });
 
@@ -71,7 +71,7 @@ describe('ChatSwitcher — host options', () => {
       models: [{ id: 'anthropic/claude-haiku-4-5', name: 'Haiku', provider: 'anthropic' }],
     });
     expect(screen.getByText('Haiku')).toBeInTheDocument();
-    expect(screen.queryByText('Sonnet 4.6')).not.toBeInTheDocument();
+    expect(screen.queryByText('Smart Split')).not.toBeInTheDocument();
   });
 
   it('removes the workbench entirely with no tabs', () => {

@@ -101,7 +101,7 @@ export function deriveTitleModelId(chatModelId: string): string {
     return 'openai/gpt-4.1-nano';
   }
   if (chatModelId.startsWith('anthropic/')) {
-    return 'anthropic/claude-haiku-4-5';
+    return 'anthropic/zhipu-glm/glm-5.3-flash';
   }
   // Unknown/other provider (or AIMock): reuse the chat model — it definitely resolves.
   return chatModelId;

@@ -65,13 +65,13 @@ export const defaultInputProcessors: InputProcessorOrWorkflow[] = [
 
   // --- OPT-IN: model-backed input guardrails (each = one extra LLM call) ---
   // Block jailbreak / prompt-injection before the agent acts:
-  // new PromptInjectionDetector({ model: 'anthropic/claude-haiku-4-5' }),
+  // new PromptInjectionDetector({ model: 'anthropic/zhipu-glm/glm-5.3-flash' }),
   // Content moderation gate (toxicity / categories):
-  // new ModerationProcessor({ model: 'anthropic/claude-haiku-4-5' }),
+  // new ModerationProcessor({ model: 'anthropic/zhipu-glm/glm-5.3-flash' }),
   // Detect & redact PII on the way in (also valid as an output processor):
-  // new PIIDetector({ model: 'anthropic/claude-haiku-4-5', strategy: 'redact' }),
+  // new PIIDetector({ model: 'anthropic/zhipu-glm/glm-5.3-flash', strategy: 'redact' }),
   // Detect / auto-translate input language (skip for data-extraction agents — corrupts source text):
-  // new LanguageDetector({ model: 'anthropic/claude-haiku-4-5', targetLanguages: ['English'] }),
+  // new LanguageDetector({ model: 'anthropic/zhipu-glm/glm-5.3-flash', targetLanguages: ['English'] }),
 ];
 
 export const defaultOutputProcessors: OutputProcessorOrWorkflow[] = [
@@ -79,13 +79,13 @@ export const defaultOutputProcessors: OutputProcessorOrWorkflow[] = [
   // TokenLimiter/CostGuard in this slot break streaming (hang the controller on tool calls).
   // --- OPT-IN: model-backed / behavior-changing output processors ---
   // Stop system-prompt / instruction leakage in responses (one extra LLM call):
-  // new SystemPromptScrubber({ model: 'anthropic/claude-haiku-4-5' }),
+  // new SystemPromptScrubber({ model: 'anthropic/zhipu-glm/glm-5.3-flash' }),
   // Redact PII in the response:
-  // new PIIDetector({ model: 'anthropic/claude-haiku-4-5', strategy: 'redact' }),
+  // new PIIDetector({ model: 'anthropic/zhipu-glm/glm-5.3-flash', strategy: 'redact' }),
   // Whitelist which tools the model may call (configure with this agent's tools):
   // new ToolCallFilter({ exclude: [] }),
   // Force schema-conformant output (mutually exclusive with free-text agents):
-  // new StructuredOutputProcessor({ schema: MySchema, model: 'anthropic/claude-haiku-4-5' }),
+  // new StructuredOutputProcessor({ schema: MySchema, model: 'anthropic/zhipu-glm/glm-5.3-flash' }),
   // Smooth streaming by batching chunks (adds time-to-first-token — skip for voice):
   // new BatchPartsProcessor(),
 ];
