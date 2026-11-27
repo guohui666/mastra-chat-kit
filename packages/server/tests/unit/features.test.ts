@@ -227,6 +227,7 @@ describe('feature switches — a narrow assistant', () => {
     const f = resolveFeatures({ ...FULL_FEATURES, demoTools: false }, { dolt: false });
     const research = chatSubagents(f).find((s) => s.id === 'research');
     expect(Object.keys(research?.tools ?? {}).sort()).toEqual([
+      'knowledge_activity',
       'knowledge_list',
       'knowledge_read',
       'knowledge_search',
